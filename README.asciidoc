@@ -3,10 +3,11 @@
 :toc:
 :icons: font
 
-This project forked from https://github.com/IntershopCommunicationsAG/javacc-gradle-plugin. because, This is to switch javaCC to ParserGeneratorCC.
+== Notice
+This project forked from https://github.com/IntershopCommunicationsAG/javacc-gradle-plugin. +
+because, This is to switch javaCC to ParserGeneratorCC. +
+this plugin will only work with Gradle 6 and JDK 8.
 
-
-NOTE: Version 4 of this plugin will only work with Gradle 6 and JDK 8.
 
 == Summary
 This plugin generates Java code from JavaCC and JJTree files. See https://javacc.github.io/javacc/[Java Compiler Compiler tm (JavaCC tm) - The Java Parser Generator].
