@@ -27,7 +27,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -120,7 +120,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -187,7 +187,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -302,7 +302,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -355,7 +355,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -457,7 +457,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -509,7 +509,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -592,7 +592,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -655,7 +655,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -719,7 +719,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -820,7 +820,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -883,7 +883,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"
@@ -1027,7 +1027,7 @@ class ExamplesKtsSpec extends AbstractIntegrationKotlinSpec {
         buildFile << """
             plugins {
                 `java`
-                id("com.intershop.gradle.javacc")
+                id("net.bitnine.gradle.javacc")
             }
 
             version = "1.0.0.0"

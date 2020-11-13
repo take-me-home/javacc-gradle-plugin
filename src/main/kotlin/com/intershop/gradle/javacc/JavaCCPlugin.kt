@@ -135,7 +135,7 @@ class JavaCCPlugin : Plugin<Project> {
                 .setDescription("Configuration for JavaCC code generator")
                 .defaultDependencies {
                     val dependencyHandler = project.dependencies
-                    it.add(dependencyHandler.create("net.java.dev.javacc:javacc:".plus(extension.javaCCVersion)))
+                    it.add(dependencyHandler.create("com.helger:parser-generator-cc:".plus(extension.javaCCVersion)))
                 }
     }
 }

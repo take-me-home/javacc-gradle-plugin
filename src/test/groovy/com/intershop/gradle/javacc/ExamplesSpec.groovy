@@ -27,7 +27,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -119,7 +119,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -184,7 +184,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -295,7 +295,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -346,7 +346,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -444,7 +444,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -494,7 +494,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -573,7 +573,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -632,7 +632,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -692,7 +692,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -789,7 +789,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -848,7 +848,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'
@@ -990,7 +990,7 @@ class ExamplesSpec extends AbstractIntegrationGroovySpec {
         buildFile << """
             plugins {
                 id 'java'
-                id 'com.intershop.gradle.javacc'
+                id 'net.bitnine.gradle.javacc'
             }
 
             version = '1.0.0.0'

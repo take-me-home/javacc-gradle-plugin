@@ -15,9 +15,10 @@
  */
 package com.intershop.gradle.javacc.task
 
+import com.helger.commons.state.ESuccess
+import com.helger.pgcc.jjtree.JJTree
 import org.gradle.api.GradleException
 import org.gradle.workers.WorkAction
-import org.javacc.jjtree.JJTree
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -36,9 +37,9 @@ abstract class JavaCCRunner : WorkAction<JavaCCRunnerParameters> {
 
     override fun execute() {
         var fileName = ""
-        var jjTreeResult = 0
+        var jjTreeResult: ESuccess = ESuccess.SUCCESS
 
-        if(parameters.jjTreeParamList.get().isNotEmpty()) {
+        if (parameters.jjTreeParamList.get().isNotEmpty()) {
             log.info("Start JJTree first ...")
 
             val jjTreeParams: MutableList<String> = mutableListOf()
@@ -53,21 +54,21 @@ abstract class JavaCCRunner : WorkAction<JavaCCRunnerParameters> {
 
             jjTreeResult = JJTree().main(jjTreeParams.toTypedArray())
         }
-        if(jjTreeResult == 0) {
+        if (jjTreeResult.isSuccess) {
             log.info("Start JavaCC code generation")
 
             val javaCCParams: MutableList<String> = mutableListOf()
             javaCCParams.apply {
                 addAll(parameters.javaCCParamList.get())
                 add("-OUTPUT_DIRECTORY=${parameters.outputDir.get().absolutePath}")
-                add(if(fileName.isNotBlank())
+                add(if (fileName.isNotBlank())
                     File(parameters.outputDir.get(), fileName).absolutePath
-                    else
+                else
                     parameters.inputFile.get().absolutePath)
             }
 
-            val javaccResult = org.javacc.parser.Main.mainProgram(javaCCParams.toTypedArray())
-            if (javaccResult != 0) {
+            val javaccResult = com.helger.pgcc.parser.Main.mainProgram(*javaCCParams.toTypedArray())
+            if (javaccResult.isFailure) {
                 log.error("Java CC code generation failed!")
                 throw GradleException("Java CC code generation failed!")
             }

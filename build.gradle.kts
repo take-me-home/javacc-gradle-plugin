@@ -2,7 +2,7 @@ import com.jfrog.bintray.gradle.BintrayExtension
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Date
+import java.util.*
 
 /*
  * Copyright 2015 Intershop Communications AG.
@@ -25,43 +25,34 @@ plugins {
     groovy
     id("nebula.kotlin") version "1.3.61"
 
-    // test coverage
-    jacoco
-
     // ide plugin
     idea
 
     // publish plugin
     `maven-publish`
 
-    // intershop version plugin
-    id("com.intershop.gradle.scmversion") version "6.1.0"
-
     // plugin for documentation
-    id("org.asciidoctor.jvm.convert") version "2.4.0"
+    id("org.asciidoctor.jvm.convert") version "3.1.0"
 
     // documentation
-    id("org.jetbrains.dokka") version "0.10.0"
+    id("org.jetbrains.dokka") version "0.10.1"
 
     // code analysis for kotlin
-    id("io.gitlab.arturbosch.detekt") version "1.4.0"
+    id("io.gitlab.arturbosch.detekt") version "1.14.2"
 
     // plugin for publishing to Gradle Portal
-    id("com.gradle.plugin-publish") version "0.10.1"
+    id("com.gradle.plugin-publish") version "0.12.0"
 
     // plugin for publishing to jcenter
-    id("com.jfrog.bintray") version "1.8.4"
+    id("com.jfrog.bintray") version "1.8.5"
 }
 
-scm {
-    version.initialVersion = "1.0.0"
-}
 
-group = "com.intershop.gradle.javacc"
+group = "net.bitnine.gradle.javacc"
 description = "Gradle javacc plugin"
-version = scm.version.version
+version = "1.0.1"
 
-val pluginId = "com.intershop.gradle.javacc"
+val pluginId = "net.bitnine.gradle.javacc"
 
 gradlePlugin {
     plugins {
@@ -97,7 +88,7 @@ detekt {
 
 tasks {
     withType<Test>().configureEach {
-        systemProperty("intershop.gradle.versions", "6.0, 6.1, 6.2")
+        systemProperty("intershop.gradle.versions", "6.0, 6.1, 6.2, 6.3, 6.4, 6.5")
 
         dependsOn("jar")
     }
@@ -111,8 +102,8 @@ tasks {
             exclude("build/**")
         }
 
-        inputs.files.plus( inputFiles )
-        outputs.dir( outputDir )
+        inputs.files.plus(inputFiles)
+        outputs.dir(outputDir)
 
         doFirst {
             outputDir.mkdir()
@@ -134,34 +125,22 @@ tasks {
             setBackends(listOf("html5", "docbook"))
         }
 
-        options = mapOf( "doctype" to "article",
-                "ruby"    to "erubis")
+        options = mapOf("doctype" to "article",
+                "ruby" to "erubis")
         attributes = mapOf(
-                "latestRevision"        to  project.version,
-                "toc"                   to "left",
-                "toclevels"             to "2",
-                "source-highlighter"    to "coderay",
-                "icons"                 to "font",
-                "setanchors"            to "true",
-                "idprefix"              to "asciidoc",
-                "idseparator"           to "-",
-                "docinfo1"              to "true")
+                "latestRevision" to project.version,
+                "toc" to "left",
+                "toclevels" to "2",
+                "source-highlighter" to "coderay",
+                "icons" to "font",
+                "setanchors" to "true",
+                "idprefix" to "asciidoc",
+                "idseparator" to "-",
+                "docinfo1" to "true")
     }
 
-    withType<JacocoReport> {
-        reports {
-            xml.isEnabled = true
-            html.isEnabled = true
-
-            html.destination = File(project.buildDir, "jacocoHtml")
-        }
-
-        val jacocoTestReport by tasks
-        jacocoTestReport.dependsOn("test")
-    }
-
-    getByName("bintrayUpload")?.dependsOn("asciidoctor")
-    getByName("jar")?.dependsOn("asciidoctor")
+    getByName("bintrayUpload").dependsOn("asciidoctor")
+    getByName("jar").dependsOn("asciidoctor")
 
     val compileKotlin by getting(KotlinCompile::class) {
         kotlinOptions.jvmTarget = "1.8"
@@ -186,46 +165,7 @@ tasks {
     register<Jar>("javaDoc") {
         dependsOn(dokka)
         from(dokka)
-        getArchiveClassifier().set("javadoc")
-    }
-}
-
-publishing {
-    publications {
-        create("intershopMvn", MavenPublication::class.java) {
-
-            from(components["java"])
-            artifact(tasks.getByName("sourceJar"))
-            artifact(tasks.getByName("javaDoc"))
-
-            artifact(File(buildDir, "docs/asciidoc/html5/README.html")) {
-                classifier = "reference"
-            }
-
-            artifact(File(buildDir, "docs/asciidoc/docbook/README.xml")) {
-                classifier = "docbook"
-            }
-
-            pom.withXml {
-                val root = asNode()
-                root.appendNode("name", project.name)
-                root.appendNode("description", project.description)
-                root.appendNode("url", "https://github.com/IntershopCommunicationsAG/${project.name}")
-
-                val scm = root.appendNode("scm")
-                scm.appendNode("url", "https://github.com/IntershopCommunicationsAG/${project.name}")
-                scm.appendNode("connection", "git@github.com:IntershopCommunicationsAG/${project.name}.git")
-
-                val org = root.appendNode("organization")
-                org.appendNode("name", "Intershop Communications")
-                org.appendNode("url", "http://intershop.com")
-
-                val license = root.appendNode("licenses").appendNode("license")
-                license.appendNode("name", "Apache License, Version 2.0")
-                license.appendNode("url", "http://www.apache.org/licenses/LICENSE-2.0")
-                license.appendNode("distribution", "repo")
-            }
-        }
+        archiveClassifier.set("javadoc")
     }
 }
 
@@ -253,7 +193,7 @@ bintray {
         version(delegateClosureOf<BintrayExtension.VersionConfig> {
             name = project.version.toString()
             desc = "${project.description} ${project.version}"
-            released  = Date().toString()
+            released = Date().toString()
             vcsTag = project.version.toString()
         })
     })
@@ -261,10 +201,9 @@ bintray {
 
 dependencies {
     implementation(gradleKotlinDsl())
-    implementation("net.java.dev.javacc:javacc:4.2")
+    implementation("com.helger:parser-generator-cc:1.1.3")
 
-    testImplementation("commons-io:commons-io:2.2")
-    testImplementation("com.intershop.gradle.test:test-gradle-plugin:3.4.0")
+    testImplementation("commons-io:commons-io:2.8.0")
     testImplementation(gradleTestKit())
 }
 

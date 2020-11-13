@@ -47,7 +47,7 @@ abstract class JavaCCExtension {
         /**
          * Default version of JavaCC library.
          */
-        const val JAVACC_VERSION = "4.2"
+        const val JAVACC_VERSION = "1.1.3"
 
         /**
          * Default output path of all generation tasks.
