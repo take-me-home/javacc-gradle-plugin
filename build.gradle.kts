@@ -1,8 +1,6 @@
-import com.jfrog.bintray.gradle.BintrayExtension
 import org.asciidoctor.gradle.jvm.AsciidoctorTask
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.*
 
 /*
  * Copyright 2015 Intershop Communications AG.
@@ -28,9 +26,6 @@ plugins {
     // ide plugin
     idea
 
-    // publish plugin
-    `maven-publish`
-
     // plugin for documentation
     id("org.asciidoctor.jvm.convert") version "3.1.0"
 
@@ -42,9 +37,6 @@ plugins {
 
     // plugin for publishing to Gradle Portal
     id("com.gradle.plugin-publish") version "0.12.0"
-
-    // plugin for publishing to jcenter
-    id("com.jfrog.bintray") version "1.8.5"
 }
 
 
@@ -66,9 +58,9 @@ gradlePlugin {
 }
 
 pluginBundle {
-    website = "https://github.com/IntershopCommunicationsAG/${project.name}"
-    vcsUrl = "https://github.com/IntershopCommunicationsAG/${project.name}"
-    tags = listOf("intershop", "gradle", "plugin", "build", "javacc")
+    website = "https://github.com/take-me-home/${project.name}"
+    vcsUrl = "https://github.com/take-me-home/${project.name}"
+    tags = listOf("javacc")
 }
 
 java {
@@ -139,7 +131,6 @@ tasks {
                 "docinfo1" to "true")
     }
 
-    getByName("bintrayUpload").dependsOn("asciidoctor")
     getByName("jar").dependsOn("asciidoctor")
 
     val compileKotlin by getting(KotlinCompile::class) {
@@ -167,36 +158,6 @@ tasks {
         from(dokka)
         archiveClassifier.set("javadoc")
     }
-}
-
-bintray {
-    user = System.getenv("BINTRAY_USER")
-    key = System.getenv("BINTRAY_KEY")
-
-    setPublications("intershopMvn")
-
-    pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
-        repo = "maven"
-        name = project.name
-        userOrg = "intershopcommunicationsag"
-
-        setLicenses("Apache-2.0")
-        vcsUrl = "https://github.com/IntershopCommunicationsAG/${project.name}"
-
-        desc = project.description
-        websiteUrl = "https://github.com/IntershopCommunicationsAG/${project.name}"
-        issueTrackerUrl = "https://github.com/IntershopCommunicationsAG/${project.name}/issues"
-
-        setLabels("intershop", "gradle", "plugin", "build", "javacc")
-        publicDownloadNumbers = true
-
-        version(delegateClosureOf<BintrayExtension.VersionConfig> {
-            name = project.version.toString()
-            desc = "${project.description} ${project.version}"
-            released = Date().toString()
-            vcsTag = project.version.toString()
-        })
-    })
 }
 
 dependencies {
