@@ -3,6 +3,9 @@
 :toc:
 :icons: font
 
+This project forked from https://github.com/IntershopCommunicationsAG/javacc-gradle-plugin. because, This is to switch javaCC to ParserGeneratorCC.
+
+
 NOTE: Version 4 of this plugin will only work with Gradle 6 and JDK 8.
 
 == Summary
