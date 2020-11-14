@@ -703,8 +703,8 @@ abstract class JavaCCTask @Inject constructor(private val workerExecutor: Worker
      */
     @get:Optional
     @get:Input
-    var tokenExtends: String
-        get() = tokenExtendsProperty.getOrElse("")
+    var tokenExtends: String?
+        get() = tokenExtendsProperty.orNull
         set(value) = tokenExtendsProperty.set(value)
 
     /**
@@ -836,16 +836,16 @@ abstract class JavaCCTask @Inject constructor(private val workerExecutor: Worker
             addBooleanParameter(paramlist,"VISITOR", pJJTree.visitor)
             addBooleanParameter(paramlist,"STATIC", pJJTree.staticParam)
 
-            addStringParameter(paramlist, "NODE_CLASS", pJJTree.nodeClass)
+            pJJTree.nodeClass?.let { addStringParameter(paramlist, "NODE_CLASS", it) }
             addStringParameter(paramlist, "NODE_PREFIX", pJJTree.nodePrefix)
-            addStringParameter(paramlist, "NODE_EXTENDS", pJJTree.nodeExtends)
-            addStringParameter(paramlist, "NODE_PACKAGE", pJJTree.nodePackage)
-            addStringParameter(paramlist, "NODE_FACTORY", pJJTree.nodeFactory)
-            addStringParameter(paramlist, "VISITOR_DATA_TYPE", pJJTree.visitorDataType)
-            addStringParameter(paramlist, "VISITOR_RETURN_TYPE", pJJTree.visitorReturnType)
-            addStringParameter(paramlist, "VISITOR_EXCEPTION", pJJTree.visitorException)
+            pJJTree.nodeExtends?.let { addStringParameter(paramlist, "NODE_EXTENDS", it) }
+            pJJTree.nodePackage?.let { addStringParameter(paramlist, "NODE_PACKAGE", it) }
+            pJJTree.nodeFactory?.let { addStringParameter(paramlist, "NODE_FACTORY", it) }
+            pJJTree.visitorDataType?.let { addStringParameter(paramlist, "VISITOR_DATA_TYPE", it) }
+            pJJTree.visitorReturnType?.let { addStringParameter(paramlist, "VISITOR_RETURN_TYPE", it) }
+            pJJTree.visitorException?.let { addStringParameter(paramlist, "VISITOR_EXCEPTION", it) }
 
-            addStringParameter(paramlist, "JDK_VERSION", jdkVersion)
+            jdkVersion?.let { addStringParameter(paramlist, "JDK_VERSION", it) }
 
             pJJTree.args.forEach {
                 paramlist.add(it)
@@ -878,13 +878,13 @@ abstract class JavaCCTask @Inject constructor(private val workerExecutor: Worker
         addBooleanParameter(paramlist,"CACHE_TOKENS", cacheTokens)
         addBooleanParameter(paramlist,"KEEP_LINE_COLUMN", keepLineColumn)
 
-        addIntegerParameter(paramlist, "CHOICE_AMBIGUITY_CHECK", choiceAmbiguityCheck)
-        addIntegerParameter(paramlist, "OTHER_AMBIGUITY_CHECK", otherAmbiguityCheck)
-        addIntegerParameter(paramlist, "LOOKAHEAD", lookahead)
+        choiceAmbiguityCheck?.let { addIntegerParameter(paramlist, "CHOICE_AMBIGUITY_CHECK", it) }
+        otherAmbiguityCheck?.let { addIntegerParameter(paramlist, "OTHER_AMBIGUITY_CHECK", it) }
+        lookahead?.let { addIntegerParameter(paramlist, "LOOKAHEAD", it) }
 
-        addStringParameter(paramlist, "TOKEN_EXTENDS", tokenExtends)
-        addStringParameter(paramlist, "TOKEN_FACTORY", tokenFactory)
-        addStringParameter(paramlist, "JDK_VERSION", jdkVersion)
+        tokenExtends?.let { addStringParameter(paramlist, "TOKEN_EXTENDS", it) }
+        tokenFactory?.let { addStringParameter(paramlist, "TOKEN_FACTORY", it) }
+        jdkVersion?.let { addStringParameter(paramlist, "JDK_VERSION", it) }
 
         javaCCArgs.forEach {
             paramlist.add(it)
@@ -893,16 +893,14 @@ abstract class JavaCCTask @Inject constructor(private val workerExecutor: Worker
         return paramlist
     }
 
-    private fun addStringParameter(paramList: MutableList<String>, paramName: String, paramValue: String?) {
-        if(paramValue != null) {
+    private fun addStringParameter(paramList: MutableList<String>, paramName: String, paramValue: String) {
+        if(paramValue.isNotBlank()) {
             paramList.add("-$paramName=$paramValue")
         }
     }
 
-    private fun addIntegerParameter(paramList: MutableList<String>, paramName: String, paramValue: Int?) {
-        if(paramValue != null) {
-            paramList.add("-$paramName=$paramValue")
-        }
+    private fun addIntegerParameter(paramList: MutableList<String>, paramName: String, paramValue: Int) {
+        paramList.add("-$paramName=$paramValue")
     }
 
     private fun addBooleanParameter(paramList: MutableList<String>, paramName: String, paramValue: String) {

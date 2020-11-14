@@ -42,7 +42,7 @@ plugins {
 
 group = "net.bitnine.gradle.javacc"
 description = "Gradle javacc plugin"
-version = "1.0.1"
+version = "1.0.2"
 
 val pluginId = "net.bitnine.gradle.javacc"
 
