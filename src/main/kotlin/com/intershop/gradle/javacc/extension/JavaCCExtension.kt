@@ -45,11 +45,6 @@ abstract class JavaCCExtension {
         const val JAVACC_CONFIGURATION_NAME = "javacc"
 
         /**
-         * Default version of JavaCC library.
-         */
-        const val JAVACC_VERSION = "1.1.3"
-
-        /**
          * Default output path of all generation tasks.
          **/
         const val CODEGEN_OUTPUTPATH = "generated/javacc"
@@ -65,27 +60,4 @@ abstract class JavaCCExtension {
      * Config container for JavaCC code generation.
      */
     val configs: NamedDomainObjectContainer<JavaCC> = objectFactory.domainObjectContainer(JavaCC::class.java)
-
-    @Suppress("UnstableApiUsage")
-    private val javaCCVersionProperty: Property<String> = objectFactory.property(String::class.java)
-
-    init {
-        javaCCVersionProperty.set(JAVACC_VERSION)
-    }
-
-    /**
-     * Provider for version configuration of JavaCC lib.
-     */
-    val javaCCVersionProvider: Provider<String>
-        get() = javaCCVersionProperty
-
-    /**
-     * Version configuration property of
-     * JavaCC lib.
-     *
-     * @property javaCCVersion
-     */
-    var javaCCVersion: String
-        get() = javaCCVersionProperty.get()
-        set(value) = javaCCVersionProperty.set(value)
 }

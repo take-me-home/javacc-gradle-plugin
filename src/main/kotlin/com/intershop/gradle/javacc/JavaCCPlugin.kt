@@ -47,8 +47,6 @@ class JavaCCPlugin : Plugin<Project> {
             val extension = extensions.findByType(JavaCCExtension::class.java) ?:
                                         extensions.create(JAVACC_EXTENSION_NAME, JavaCCExtension::class.java)
 
-            addJavaCCConfiguration(this, extension)
-
             configureTask(this, extension)
         }
     }
@@ -120,22 +118,5 @@ class JavaCCPlugin : Plugin<Project> {
                 }
             }
         }
-    }
-
-    /**
-     * Adds the dependencies for the code generation. It is possible to override this.
-     *
-     * @param project
-     * @param extension
-     */
-    private fun addJavaCCConfiguration(project: Project, extension: JavaCCExtension) {
-        val configuration = project.configurations.maybeCreate(JavaCCExtension.JAVACC_CONFIGURATION_NAME)
-        configuration.setVisible(false)
-                .setTransitive(true)
-                .setDescription("Configuration for JavaCC code generator")
-                .defaultDependencies {
-                    val dependencyHandler = project.dependencies
-                    it.add(dependencyHandler.create("com.helger:parser-generator-cc:".plus(extension.javaCCVersion)))
-                }
     }
 }
