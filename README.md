@@ -4,16 +4,22 @@ Table of Contents
 
 - [Notice](#notice)
 - [Summary](#summary)
+- [Changelog](#changelog)
 - [Usage](#usage)
+- [License](#license)
+
+
+
 - [Tasks](docs/en/tasks.md)
 - [Project Extension](docs/en/project-extension.md)
-- [License](#license)
 
 # Notice
 
 ***This project forked from <https://github.com/IntershopCommunicationsAG/javacc-gradle-plugin>.***  
 
 This project use ParserGeneratorCC instead of JavaCC.  
+
+
 
 # Summary
 
@@ -24,6 +30,15 @@ See [Java Compiler Compiler tm (JavaCC tm) - The Java Parser Generator](https://
 
 
 ParserGeneratorCC = 1.1.3
+
+
+
+# Changelog
+
+- 1.0.2 - 2020-11-16
+  - [Fix bug: build wrong with use tokenExtends option](https://github.com/take-me-home/javacc-gradle-plugin/commit/64ef245)
+- 1.0.1 - 2020-11-14
+  - Updated to ParserGeneratorCC 1.1.3
 
 
 
@@ -72,6 +87,7 @@ Kotlin
             }
         }
     }
+
 
 
 # License
